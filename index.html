@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday My Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero__content">
+          <p class="hero__kicker">For You 💖</p>
+          <h1>Happy Birthday My Love</h1>
+          <p class="hero__message">
+            A little story of us, written in moments. Scroll down and relive every memory.
+          </p>
+          <p class="hero__scroll">Scroll to begin ↓</p>
+        </div>
+      </section>
+
+      <section class="memories" id="memories">
+        <h2 class="section-title">Our Memories</h2>
+
+        <!-- Each memory panel provides enough vertical space for a full scroll-driven motion arc. -->
+        <article class="memory-panel">
+          <div class="memory-card">
+            <img src="images/memory-1.jpg" alt="Our first smile together" />
+            <p>That day when your smile made the whole world feel softer.</p>
+          </div>
+        </article>
+
+        <article class="memory-panel">
+          <div class="memory-card">
+            <img src="images/memory-2.jpg" alt="A walk under golden evening light" />
+            <p>Our evening walks where time slowed down just for us.</p>
+          </div>
+        </article>
+
+        <article class="memory-panel">
+          <div class="memory-card">
+            <img src="images/memory-3.jpg" alt="Laughing during a cozy date" />
+            <p>The laughter we shared still echoes in my heart.</p>
+          </div>
+        </article>
+
+        <article class="memory-panel">
+          <div class="memory-card">
+            <img src="images/memory-4.jpg" alt="A peaceful candid moment together" />
+            <p>Even in silence, being with you felt like music.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="letters" id="letters">
+        <h2 class="section-title">The IGP Letters</h2>
+        <p class="section-subtitle">Keep scrolling to open the envelope…</p>
+
+        <div class="envelope-stage">
+          <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope" id="envelope">
+              <div class="letters-stack" id="lettersStack">
+                <button class="letter-card" data-letter="images/letter-1.jpg" aria-label="Open letter 1">
+                  <img src="images/letter-1.jpg" alt="Love letter one" />
+                </button>
+                <button class="letter-card" data-letter="images/letter-2.jpg" aria-label="Open letter 2">
+                  <img src="images/letter-2.jpg" alt="Love letter two" />
+                </button>
+                <button class="letter-card" data-letter="images/letter-3.jpg" aria-label="Open letter 3">
+                  <img src="images/letter-3.jpg" alt="Love letter three" />
+                </button>
+                <button class="letter-card" data-letter="images/letter-4.jpg" aria-label="Open letter 4">
+                  <img src="images/letter-4.jpg" alt="Love letter four" />
+                </button>
+              </div>
+
+              <div class="envelope__flap" id="envelopeFlap"></div>
+              <div class="envelope__body"></div>
+              <div class="envelope__front"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="letter-modal" id="letterModal" aria-hidden="true">
+      <div class="letter-modal__backdrop" data-close="true"></div>
+      <div class="letter-modal__content" role="dialog" aria-modal="true" aria-label="Love letter preview">
+        <img id="modalImage" src="" alt="Opened love letter" />
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
