@@ -140,6 +140,21 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// Click-to-reveal functionality
+const revealButtons = document.querySelectorAll(".reveal-button");
+
+revealButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const memoryCard = button.closest(".memory-card");
+    const imageContainer = memoryCard.querySelector(".image-container");
+
+    if (imageContainer.classList.contains("hidden")) {
+      imageContainer.classList.remove("hidden");
+      button.style.display = "none";
+    }
+  });
+});
+
 // Opening animation script
 const openingAnimation = document.getElementById('opening-animation');
 
@@ -194,3 +209,31 @@ const observer = new IntersectionObserver(
 );
 
 observer.observe(loveLetterSection);
+
+// Music Card Play/Pause Functionality
+const playButton = document.getElementById("play-button");
+const audioPlayer = document.getElementById("audio-player");
+
+playButton.addEventListener("click", () => {
+  if (audioPlayer.paused) {
+    audioPlayer.play();
+    playButton.textContent = "⏸";
+    playButton.classList.add("playing");
+  } else {
+    audioPlayer.pause();
+    playButton.textContent = "▶️";
+    playButton.classList.remove("playing");
+  }
+});
+
+// Optional: Smooth fade-in for audio
+audioPlayer.addEventListener("play", () => {
+  audioPlayer.volume = 0;
+  const fadeIn = setInterval(() => {
+    if (audioPlayer.volume < 1) {
+      audioPlayer.volume = Math.min(audioPlayer.volume + 0.1, 1);
+    } else {
+      clearInterval(fadeIn);
+    }
+  }, 200);
+});

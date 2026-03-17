@@ -409,6 +409,12 @@ main {
   overflow: hidden;
 }
 
+video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
 
 .heart {
   aspect-ratio: 1;
@@ -423,7 +429,7 @@ main {
   width: 50px;
   height: 50px;
   background: radial-gradient(circle, #ff6b81, #ff4757);
-  animation: float 4s ease-in-out infinite, fadeIn 3s ease-in-out;
+  animation: float 3s ease-in-out infinite, fadeIn 2s ease-in-out;
 }
 
 .heart.center {
@@ -431,7 +437,7 @@ main {
   height: 300px;
   background: radial-gradient(circle, #ff4757, #ff6b81);
   box-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
-  animation: heartbeat 1.5s ease-in-out infinite, fadeIn 3s ease-in-out;
+  animation: heartbeat 1s ease-in-out infinite, fadeIn 2s ease-in-out;
   z-index: 1000;
 }
 
@@ -597,4 +603,88 @@ main {
   25% { transform: rotate(6deg); }
   50% { transform: rotate(0deg); }
   75% { transform: rotate(-6deg); }
+}
+
+/* Music Card Styles */
+.music-card {
+  width: min(90vw, 600px);
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.music-card h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.music-card p {
+  font-family: "Inter", sans-serif;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b81, #ff4757);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.play-button:focus {
+  outline: none;
+}
+
+.play-button.playing {
+  box-shadow: 0 0 15px rgba(255, 71, 87, 0.8);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Hidden image container */
+.image-container.hidden {
+  display: none;
+}
+
+/* Reveal button */
+.reveal-button {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: white;
+  background: var(--accent);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background 0.3s ease;
+}
+
+.reveal-button:hover {
+  background: #d97a8c;
 }
