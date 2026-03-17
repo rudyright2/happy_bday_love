@@ -189,8 +189,8 @@ window.addEventListener("load", () => {
 
     setTimeout(() => {
       openingAnimation.remove();
-    }, 1200);
-  }, 7000); // slightly longer and AFTER load
+    }, 1000);
+  }, 2500); // slightly longer and AFTER load
 });
 
 // Intersection Observer for Love Letter Section
