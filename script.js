@@ -34,19 +34,6 @@ document.querySelectorAll(".memory-panel").forEach((panel) => {
     .to(card, { yPercent: -135, scale: 0.9, opacity: 0, ease: "power2.in", duration: 1 });
 });
 
-// Add animation to hint users about the hover feature
-const memoryImages = document.querySelectorAll(".memory-card img");
-
-memoryImages.forEach((img) => {
-  img.addEventListener("mouseover", () => {
-    img.style.animation = "pulse 2s infinite";
-  });
-
-  img.addEventListener("mouseout", () => {
-    img.style.animation = "";
-  });
-});
-
 const envelope = document.getElementById("envelope");
 const flap = document.getElementById("envelopeFlap");
 const letters = gsap.utils.toArray(".letter-card");
@@ -152,3 +139,55 @@ document.addEventListener("keydown", (event) => {
     closeLetter();
   }
 });
+
+// Opening animation script
+const openingAnimation = document.getElementById('opening-animation');
+
+function createHeart(isCenter = false) {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  if (isCenter) heart.classList.add('center');
+
+  // Randomize position for non-center hearts
+  if (!isCenter) {
+    heart.style.left = `${Math.random() * 100}vw`;
+    heart.style.top = `${Math.random() * 100}vh`;
+    heart.style.animationDelay = `${Math.random() * 2}s`;
+  }
+
+  openingAnimation.appendChild(heart);
+}
+
+// Generate multiple hearts
+for (let i = 0; i < 20; i++) {
+  createHeart();
+}
+
+// Add the central heart
+createHeart(true);
+
+// Remove animation overlay after completion
+setTimeout(() => {
+  openingAnimation.style.opacity = '0';
+  openingAnimation.style.transition = 'opacity 1s ease';
+  setTimeout(() => {
+    openingAnimation.remove();
+  }, 1000);
+}, 6000);
+
+// Intersection Observer for Love Letter Section
+const loveLetterSection = document.querySelector("#love-letter");
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      const paragraphs = loveLetterSection.querySelectorAll("p");
+      paragraphs.forEach((p, index) => {
+        p.style.animation = `fadeIn 1.5s ease ${index * 0.3}s forwards`;
+      });
+      observer.unobserve(loveLetterSection);
+    }
+  },
+  { threshold: 0.5 }
+);
+
+observer.observe(loveLetterSection);

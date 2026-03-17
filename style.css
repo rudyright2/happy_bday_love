@@ -46,6 +46,8 @@ main {
   border-radius: 2rem;
   padding: clamp(1.8rem, 2vw + 1rem, 3rem);
   box-shadow: var(--shadow);
+  -webkit-backdrop-filter: blur(4px); /* Safari support */
+  backdrop-filter: blur(4px);
 }
 
 .hero__kicker {
@@ -111,16 +113,29 @@ main {
 
 .memory-card img {
   width: 100%;
-  height: clamp(220px, 42vw, 410px);
-  object-fit: cover;
+  height: auto;
+  object-fit: contain; /* Ensure the entire image is visible without cropping */
   border-radius: 1.15rem;
   display: block;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.memory-card img.fullscreen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-width: 90%;
+  max-height: 90%;
+  z-index: 1000;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 .memory-card img:hover {
-  transform: scale(1.2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transform: scale(1.5); /* Adjust scale to ensure full resolution */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  position: relative;
 }
 
 .memory-card img::after {
@@ -379,6 +394,77 @@ main {
   display: block;
 }
 
+/* Opening animation overlay */
+#opening-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffe6e9, #ffccd5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+
+.heart {
+  aspect-ratio: 1;
+  clip-path: 
+    shape(
+      from 50% 91%,
+      line to 90% 50%,
+      arc to 50% 9%  of 1%,
+      arc to 10% 50% of 1%
+    );
+    position: absolute;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, #ff6b81, #ff4757);
+  animation: float 4s ease-in-out infinite, fadeIn 3s ease-in-out;
+}
+
+.heart.center {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #ff4757, #ff6b81);
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
+  animation: heartbeat 1.5s ease-in-out infinite, fadeIn 3s ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
 @media (max-width: 768px) {
   .memory-panel {
     min-height: 108svh;
@@ -393,4 +479,122 @@ main {
     width: 95vw;
     margin-top: 9vh;
   }
+}
+
+/* Love Letter Section */
+.love-letter {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  line-height: 1.8;
+  color: var(--text);
+  background: linear-gradient(180deg, #fff6f8, #ffecef);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.love-letter h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.love-letter .highlight {
+  color: var(--accent);
+  font-weight: bold;
+  animation: pulseHighlight 2s infinite;
+}
+
+.love-letter .signature {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  color: var(--text-muted);
+  margin-top: 2rem;
+  animation: slideUp 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseHighlight {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(233, 140, 163, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(233, 140, 163, 0.8);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Emoji Base */
+.emoji-heart,
+.emoji-tears,
+.emoji-love,
+.emoji-laugh {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ❤️ Heart - soft heartbeat */
+.emoji-heart {
+  animation: pulseHeart 1.2s ease-in-out infinite;
+}
+
+@keyframes pulseHeart {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.15); }
+  50% { transform: scale(1.25); }
+  75% { transform: scale(1.1); }
+}
+
+/* 🥹 / 😥 - gentle float + slight sway */
+.emoji-tears {
+  animation: floatTears 2.5s ease-in-out infinite;
+}
+
+@keyframes floatTears {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+
+/* 💕 / 💖 - soft pop + glow feel */
+.emoji-love {
+  animation: popLove 1.8s ease-in-out infinite;
+}
+
+@keyframes popLove {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
+}
+
+/* 😂 - playful shake */
+.emoji-laugh {
+  animation: shakeLaugh 1.2s ease-in-out infinite;
+}
+
+@keyframes shakeLaugh {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(6deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-6deg); }
 }
