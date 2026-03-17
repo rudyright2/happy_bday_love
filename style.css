@@ -411,32 +411,19 @@ main {
 
 
 .heart {
-  position: absolute;
+  aspect-ratio: 1;
+  clip-path: 
+    shape(
+      from 50% 91%,
+      line to 90% 50%,
+      arc to 50% 9%  of 1%,
+      arc to 10% 50% of 1%
+    );
+    position: absolute;
   width: 50px;
   height: 50px;
-  background: red;
-  transform: rotate(-45deg);
-  animation: float 4s ease-in-out infinite, fadeIn 2s ease-in-out;
-}
-
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background: inherit;
-  border-radius: 50%;
-}
-
-.heart::before {
-  top: -25px;
-  left: 0;
-}
-
-.heart::after {
-  left: 25px;
-  top: 0;
+  background: radial-gradient(circle, #ff6b81, #ff4757);
+  animation: float 4s ease-in-out infinite, fadeIn 3s ease-in-out;
 }
 
 .heart.center {
@@ -508,6 +495,7 @@ main {
   box-shadow: var(--shadow);
   opacity: 0;
   transform: translateY(50px);
+  animation: fadeIn 1.5s ease forwards;
 }
 
 .love-letter h2 {
@@ -564,6 +552,7 @@ main {
 .emoji-love,
 .emoji-laugh {
   display: inline-block;
+  will-change: transform;
 }
 
 /* ❤️ Heart - soft heartbeat */
