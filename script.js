@@ -167,13 +167,16 @@ for (let i = 0; i < 20; i++) {
 createHeart(true);
 
 // Remove animation overlay after completion
-setTimeout(() => {
-  openingAnimation.style.opacity = '0';
-  openingAnimation.style.transition = 'opacity 1s ease';
+window.addEventListener("load", () => {
   setTimeout(() => {
-    openingAnimation.remove();
-  }, 1000);
-}, 6000);
+    openingAnimation.style.transition = "opacity 1.2s ease";
+    openingAnimation.style.opacity = "0";
+
+    setTimeout(() => {
+      openingAnimation.remove();
+    }, 1200);
+  }, 7000); // slightly longer and AFTER load
+});
 
 // Intersection Observer for Love Letter Section
 const loveLetterSection = document.querySelector("#love-letter");
