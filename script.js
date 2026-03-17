@@ -34,6 +34,19 @@ document.querySelectorAll(".memory-panel").forEach((panel) => {
     .to(card, { yPercent: -135, scale: 0.9, opacity: 0, ease: "power2.in", duration: 1 });
 });
 
+// Add animation to hint users about the hover feature
+const memoryImages = document.querySelectorAll(".memory-card img");
+
+memoryImages.forEach((img) => {
+  img.addEventListener("mouseover", () => {
+    img.style.animation = "pulse 2s infinite";
+  });
+
+  img.addEventListener("mouseout", () => {
+    img.style.animation = "";
+  });
+});
+
 const envelope = document.getElementById("envelope");
 const flap = document.getElementById("envelopeFlap");
 const letters = gsap.utils.toArray(".letter-card");
